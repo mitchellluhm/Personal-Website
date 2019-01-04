@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+	<meta charset="utf-8">
+	<title>Blog</title>
+	
+	<link rel="stylesheet"
+	      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+	      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+	      crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" 
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" 
+		crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" 
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" 
+		crossorigin="anonymous">
+	</script>
+
+	<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js">
+	</script>
+	<link rel="stylesheet" 
+	      href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" 
+	      type="text/css"
+	      media="screen" 
+	      charset="utf-8">
+
+	<link rel="stylesheet"
+	      href="{% static 'css/blog.css' %}">
+
+    </head>
+
+    <body>
+
+	<nav class="navbar navbar-default">
+	    <div class="container">
+		<ul class="nav navbar-nav">
+		    <li><a class="navbar-brand" href=""></a></li>
+		    <li><a href="{% url 'about'%}">About</a></li>
+		    <li><a href="https://www.github.com">Github</a></li>
+		    <li><a href="https://www.linkedin.com">LinkedIn</a></li>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+		    {% if user.is_authenticated %}
+			<li>
+			    <a href="{% url 'post_new' %}">New Post</a>
+			</li>
+			<li>
+			    <a href="{% url 'post_draft_list' %}">Drafts</a>
+			</li>
+			<li>
+			    <a href="{% url 'logout' %}">Logout</a>
+			</li>
+			<li>
+			    <a>Welcome: {{user.username }}</a>
+			</li>
+		    {% else %}
+			<li>
+			    <a class="nav navbar-right" href="{% url 'login' %}">
+				<span class="glyphicon glyphicon-user"></span>
+			    </a>
+			</li>
+		    {% endif %}
+	    </div>
+	</nav>
+
+	<div class="content container">
+	    <div class="row">
+		<div class="col-md-8">
+		    <div class="blog_posts">
+			{% block content %}
+			{% endblock %}
+		    </div>
+		</div>
+	    </div>
+	</div>
+
+
+    </body>
+</html>
