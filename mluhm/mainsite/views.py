@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template import loader
 from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
 
@@ -26,6 +26,18 @@ def about(request):
 
     return HttpResponse(template.render({}, request))
 
+def post_detail(request, pk):
+    # find blog post with specified parameter
+    try:
+        post = Post.objects.get(pk=pk)
+    except:
+        raise Http404("This post does not exist.")
+
+    template = loader.get_template('post_detail.html')
+    context = {'post' : post}
+
+    return HttpResponse(template.render(context, request))
+
 class AboutView(TemplateView):
     template_name = 'about.html'
 
@@ -41,6 +53,8 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+    # get individual page
 
 class CreatePostView(LoginRequiredMixin, CreateView):
     # don't want everyone to access this create post view
