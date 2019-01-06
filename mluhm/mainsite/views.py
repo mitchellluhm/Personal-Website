@@ -38,6 +38,17 @@ def post_detail(request, pk):
 
     return HttpResponse(template.render(context, request))
 
+@login_required
+def post_new(request):
+    template = loader.get_template('post_form.html')
+    form = PostForm
+    context = {
+        'form' : form
+    }
+
+    return HttpResponse(template.render(context, request))
+    
+
 class AboutView(TemplateView):
     template_name = 'about.html'
 
