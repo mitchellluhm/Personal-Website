@@ -17,8 +17,11 @@ def index(request):
 class AboutView(TemplateView):
     template_name = 'about.html'
 
-class PostListView():
+class PostListView(ListView):
     model = Post
+
+    # adding
+    template_name = 'post_list.html'
 
     def get_queryset(self):
         # "FIELD LOOKUPS"
@@ -30,13 +33,13 @@ class PostDetailView(DetailView):
 class CreatePostView(LoginRequiredMixin, CreateView):
     # don't want everyone to access this create post view
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'
+    redirect_field_name = 'post_detail.html'
     form_class = PostForm
     model = Post
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'
+    redirect_field_name = 'post_detail.html'
     form_class = PostForm
     model = Post
 
@@ -46,7 +49,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_list.html'
+    redirect_field_name = 'post_list.html'
     model = Post
 
     def get_queryset(self):
