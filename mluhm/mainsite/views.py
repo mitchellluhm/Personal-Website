@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.template import loader
 from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
 
 from mainsite.models import Post
@@ -12,7 +13,18 @@ from django.utils import timezone
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello!")
+    latest_posts = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
+    template = loader.get_template('post_list.html')
+    context = {
+        'latest_posts' : latest_posts
+    }
+
+    return HttpResponse(template.render(context, request))
+
+def about(request):
+    template = loader.get_template('about.html')
+
+    return HttpResponse(template.render({}, request))
 
 class AboutView(TemplateView):
     template_name = 'about.html'

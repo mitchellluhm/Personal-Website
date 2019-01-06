@@ -19,7 +19,8 @@ from django.contrib.auth import views
 # from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
-    path('', include('mainsite.urls')), # MIGHT WORK ?
+    path('m/', include('mainsite.urls')), # MIGHT WORK ?
+
     path('admin/', admin.site.urls),
     path('login/', views.LoginView, name='login'),
     path('logout/', views.LogoutView, name='logout', kwargs={'next_page':'/'}),
