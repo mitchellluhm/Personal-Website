@@ -65,11 +65,14 @@
 		<nav class="nav d-flex justify-content-between">
 		    <a class="p-2 text-muted" href="{% url 'index' %}">Home</a>
 		    <a class="p-2 text-muted" href="{% url 'about' %}">About</a>
+		    <a class="p-2 text-muted" href="{% url 'projects' %}">Projects</a>
 		    <a class="p-2 text-muted" href="https://github.com/mitchellluhm">GitHub</a>
 		</nav>
 	    </div>
 
 
+	    {% block content %}
+	    {% endblock %}
 
 
 	</div>
@@ -115,8 +118,6 @@
 	    <div class="row">
 		<div class="col-md-8">
 		    <div class="blog_posts">
-			{% block content %}
-			{% endblock %}
 		    </div>
 		</div>
 	    </div>

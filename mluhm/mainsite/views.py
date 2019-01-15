@@ -14,12 +14,22 @@ from django.utils import timezone
 # Create your views here.
 def index(request):
     latest_posts = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
+    most_rec = latest_posts[0]
+    most_rec2 = latest_posts[1]
+    
     template = loader.get_template('post_list.html')
     context = {
-        'latest_posts' : latest_posts
+        'latest_posts' : latest_posts,
+        'most_rec' : most_rec,
+        'most_rec2' : most_rec2,
     }
 
     return HttpResponse(template.render(context, request))
+
+def projects(request):
+    template = loader.get_template('projects.html')
+
+    return HttpResponse(template.render({}, request))
 
 def about(request):
     template = loader.get_template('about.html')
