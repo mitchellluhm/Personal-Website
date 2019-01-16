@@ -26,14 +26,20 @@ def index(request):
 
     return HttpResponse(template.render(context, request))
 
+def blog(request):
+    template = loader.get_template('blog.html')
+    return HttpResponse(template.render({}, request))
+
 def projects(request):
     template = loader.get_template('projects.html')
-
     return HttpResponse(template.render({}, request))
 
 def about(request):
     template = loader.get_template('about.html')
+    return HttpResponse(template.render({}, request))
 
+def contact(request):
+    template = loader.get_template('contact.html')
     return HttpResponse(template.render({}, request))
 
 def post_detail(request, pk):
