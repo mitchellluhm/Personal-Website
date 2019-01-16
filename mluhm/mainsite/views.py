@@ -27,8 +27,13 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def blog(request):
+    latest_posts = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
     template = loader.get_template('blog.html')
-    return HttpResponse(template.render({}, request))
+
+    context = {
+        'latest_posts' : latest_posts,
+    }
+    return HttpResponse(template.render(context, request))
 
 def projects(request):
     template = loader.get_template('projects.html')

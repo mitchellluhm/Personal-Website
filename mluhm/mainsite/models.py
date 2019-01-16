@@ -4,7 +4,7 @@ from django.urls import reverse
 # from django.core.urlresolvers import reverse
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT) # missing on_delete
+    author = models.ForeignKey('auth.User', on_delete=models.PROTECT)
     title = models.CharField(max_length=256)
     text = models.TextField()
     start_date = models.DateTimeField(default=timezone.now())

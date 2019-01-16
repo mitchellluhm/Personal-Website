@@ -1,6 +1,29 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<h1>About me</h1>
+<h1>Blog</h1>
 
-<p>...stuff...</p>
+<table class="table table-striped">
+    <thead>
+	<tr>
+	    <th>Post Title</th>
+	    <th>Date Published</th>
+	    <th>Author</th>
+	</tr>
+    </thead>
+    <tbody>
+	{% for post in latest_posts %}
+	    <tr>
+		<td><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></td>
+		<td>{{ post.publish_date }}</td>
+		<td>{{ post.author }}</td>
+	    </tr>
+	{% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $('#blog_nav').removeClass('text-muted');
+</script>
+
 {% endblock %}
+
