@@ -18,7 +18,7 @@
 		    <a class="text-dark" href="#">{{ most_rec.title }}</a>
 		</h3>
 		<div class="mb-1 text-muted">{{ most_rec.publish_date }}</div>
-		    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+		<p class="card-text mb-auto">{{ most_rec.text|truncatechars_html:65|striptags }}</p>
 		    <a href="{% url 'post_detail' pk=most_rec.pk %}">Continue reading</a>
 	    </div>
 	    <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
@@ -32,7 +32,7 @@
 		    <a class="text-dark" href="#">{{ most_rec2.title }}</a>
 		</h3>
 		<div class="mb-1 text-muted">{{ most_rec2.publish_date }}</div>
-		    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+		<p class="card-text mb-auto">{{ most_rec2.text|truncatechars_html:65|striptags }}</p>
 		    <a href="{% url 'post_detail' pk=most_rec2.pk %}">Continue reading</a>
 	    </div>
 	    <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
